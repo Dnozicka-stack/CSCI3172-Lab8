@@ -16,6 +16,7 @@ exports.handler = async (event, context) => {
     const sanitizedData = {
       name: data.name.trim(),
       email: data.email.trim().toLowerCase(),
+      subject: data.subject.trim(),
       message: data.message.trim(),
     };
 
