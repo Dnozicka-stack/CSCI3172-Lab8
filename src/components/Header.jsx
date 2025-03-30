@@ -31,6 +31,7 @@ function Header() {
           <li><Link to="/about" onClick={closeMenu} aria-label="About page">About</Link></li>
           <li><Link to="/resume" onClick={closeMenu} aria-label="Resume page">Resume</Link></li>
           <li><Link to="/projects" onClick={closeMenu} aria-label="Projects page">Projects</Link></li>
+          <li><Link to="/contact" onClick={closeMenu} aria-label="Contact page">Contact</Link></li>
         </ul>
       </nav>
     </header>
