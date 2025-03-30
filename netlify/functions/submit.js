@@ -24,6 +24,7 @@ exports.handler = async (event, context) => {
       body: JSON.stringify({ message: 'Form submitted successfully!' }),
     };
   } catch (error) {
+    console.error('Error processing form submission:', error);
     return {
       statusCode: 500,
       body: JSON.stringify({ message: 'Failed to submit form.' }),
