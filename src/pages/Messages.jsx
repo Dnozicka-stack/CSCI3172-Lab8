@@ -27,9 +27,9 @@ const Messages = () => {
         const lowerCaseSearchTerm = searchTerm.toLowerCase();
         console.log('Filtering with search term:', lowerCaseSearchTerm);
         return (
-            msg.name.toLowerCase().includes(lowerCaseSearchTerm) ||
-            msg.subject.toLowerCase().includes(lowerCaseSearchTerm) ||
-            msg.message.toLowerCase().includes(lowerCaseSearchTerm)
+            (msg.name && msg.name.toLowerCase().includes(lowerCaseSearchTerm)) ||
+            (msg.subject && msg.subject.toLowerCase().includes(lowerCaseSearchTerm)) ||
+            (msg.message && msg.message.toLowerCase().includes(lowerCaseSearchTerm))
         );
     });
 
