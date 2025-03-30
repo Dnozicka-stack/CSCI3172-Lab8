@@ -10,6 +10,8 @@ const ContactForm = () => {
     });
     const [errors, setErrors] = useState({});
     const [successMessage, setSuccessMessage] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+    const [draftSavedMessage, setDraftSavedMessage] = useState('');
 
     // Effect to restore form data from localStorage on component mount
     useEffect(() => {
@@ -28,6 +30,7 @@ const ContactForm = () => {
         };
         setFormData(updatedFormData);
         localStorage.setItem('contactFormDraft', JSON.stringify(updatedFormData));
+        setDraftSavedMessage('Draft saved');
     };
 
     // Validate form inputs
@@ -67,12 +70,14 @@ const ContactForm = () => {
             .then(data => {
                 if (data.message) {
                     setSuccessMessage(data.message);
+                    setErrorMessage('');
                     localStorage.removeItem('contactFormDraft');
                     setFormData({ name: '', email: '', subject: '', message: '', consent: false });
                 }
             })
             .catch(error => {
-                setSuccessMessage('Failed to submit form.');
+                setErrorMessage('Failed to submit form.');
+                setSuccessMessage('');
             });
         } else {
             setErrors(validationErrors);
@@ -107,6 +112,8 @@ const ContactForm = () => {
 
                 <button type="submit">Submit</button>
                 {successMessage && <span className="success" style={{ color: 'green' }}>{successMessage}</span>}
+                {errorMessage && <span className="error" style={{ color: 'red' }}>{errorMessage}</span>}
+                {draftSavedMessage && <span className="info" style={{ color: 'blue' }}>{draftSavedMessage}</span>}
             </form>
         </div>
     );
