@@ -770,15 +770,15 @@ button:hover {
 .messages-list {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 .messages-list li {
-  padding: 15px;
-  margin-bottom: 10px;
+  background-color: var(--card-bg);
   border: 1px solid var(--card-border);
   border-radius: 8px;
-  background-color: var(--card-bg);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 15px;
   transition: all 0.3s ease;
 }
 
@@ -791,6 +791,15 @@ button:hover {
   display: block;
   margin-bottom: 5px;
   color: var(--text-color);
+  font-weight: 600;
+  font-size: 1.1em;
+}
+
+.messages-list li p {
+  color: var(--text-color);
+  opacity: 0.8;
+  margin: 10px 0 0 0;
+  line-height: 1.5;
 }
 
 .consent-container {
