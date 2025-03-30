@@ -23,11 +23,17 @@ const Messages = () => {
             });
     }, []);
 
-    const filteredMessages = messages.filter(msg =>
-        msg.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        msg.subject.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        msg.message.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const filteredMessages = messages.filter(msg => {
+        const lowerCaseSearchTerm = searchTerm.toLowerCase();
+        console.log('Filtering with search term:', lowerCaseSearchTerm);
+        return (
+            msg.name.toLowerCase().includes(lowerCaseSearchTerm) ||
+            msg.subject.toLowerCase().includes(lowerCaseSearchTerm) ||
+            msg.message.toLowerCase().includes(lowerCaseSearchTerm)
+        );
+    });
+
+    console.log('Filtered messages:', filteredMessages);
 
     return (
         <div className="messages-container">
