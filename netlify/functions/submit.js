@@ -1,23 +1,28 @@
-const fs = require('fs');
-const path = require('path');
+const admin = require('firebase-admin');
+
+// Parse the service account key from the environment variable
+const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY);
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+});
+
+const db = admin.firestore();
 
 exports.handler = async (event, context) => {
   try {
     const data = JSON.parse(event.body);
-    const filePath = path.join(__dirname, 'messages.json');
 
-    // Read existing messages
-    let messages = [];
-    if (fs.existsSync(filePath)) {
-      const fileData = fs.readFileSync(filePath, 'utf8');
-      messages = JSON.parse(fileData);
-    }
+    // Sanitize the input data
+    const sanitizedData = {
+      name: data.name.trim(),
+      email: data.email.trim().toLowerCase(),
+      message: data.message.trim(),
+    };
 
-    // Add new message
-    messages.push(data);
-
-    // Write updated messages back to the file
-    fs.writeFileSync(filePath, JSON.stringify(messages, null, 2));
+    // Add new message to Firestore
+    const docRef = db.collection('messages').doc();
+    await docRef.set(sanitizedData);
 
     return {
       statusCode: 200,
