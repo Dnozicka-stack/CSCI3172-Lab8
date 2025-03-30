@@ -49,6 +49,8 @@ const Messages = () => {
                 <p>Loading messages...</p>
             ) : error ? (
                 <p style={{ color: 'red' }}>{error}</p>
+            ) : filteredMessages.length === 0 ? (
+                <p>No messages found.</p>
             ) : (
                 <ul className="messages-list">
                     {filteredMessages.map((msg, index) => (
