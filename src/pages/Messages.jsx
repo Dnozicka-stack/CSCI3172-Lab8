@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 const Messages = () => {
     const [messages, setMessages] = useState([]);
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         fetch('/.netlify/functions/getMessages')
@@ -13,23 +14,32 @@ const Messages = () => {
                 } else {
                     setError('Failed to load messages.');
                 }
+                setLoading(false);
             })
-            .catch(() => setError('Failed to load messages.'));
+            .catch(() => {
+                setError('Failed to load messages.');
+                setLoading(false);
+            });
     }, []);
 
     return (
-        <div>
+        <div className="messages-container">
             <h1>Messages</h1>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-            <ul>
-                {messages.map((msg, index) => (
-                    <li key={index}>
-                        <strong>Name:</strong> {msg.name}<br />
-                        <strong>Subject:</strong> {msg.subject}<br />
-                        <strong>Message:</strong> {msg.message}<br />
-                    </li>
-                ))}
-            </ul>
+            {loading ? (
+                <p>Loading messages...</p>
+            ) : error ? (
+                <p style={{ color: 'red' }}>{error}</p>
+            ) : (
+                <ul className="messages-list">
+                    {messages.map((msg, index) => (
+                        <li key={index}>
+                            <strong>Name:</strong> {msg.name}<br />
+                            <strong>Subject:</strong> {msg.subject}<br />
+                            <strong>Message:</strong> {msg.message}<br />
+                        </li>
+                    ))}
+                </ul>
+            )}
         </div>
     );
 };
