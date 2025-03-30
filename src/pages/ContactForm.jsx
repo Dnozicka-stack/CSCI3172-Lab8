@@ -22,10 +22,12 @@ const ContactForm = () => {
     // Handle input changes
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
-        setFormData({
+        const updatedFormData = {
             ...formData,
             [name]: type === 'checkbox' ? checked : value
-        });
+        };
+        setFormData(updatedFormData);
+        localStorage.setItem('contactFormDraft', JSON.stringify(updatedFormData));
     };
 
     // Validate form inputs

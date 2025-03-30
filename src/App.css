@@ -796,3 +796,9 @@ button:hover {
 .consent-container input[type="checkbox"] {
   margin-right: 10px;
 }
+
+.form-error {
+  color: red;
+  font-size: 0.9em;
+  margin-top: 5px;
+}
