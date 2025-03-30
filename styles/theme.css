@@ -1,0 +1,36 @@
+:root.light {
+  --background-color: #ffffff;
+  --text-color: #333333;
+  --primary-color: #007bff;
+}
+
+:root.dark {
+  --background-color: #1a1a1a;
+  --text-color: #ffffff;
+  --primary-color: #4dabf7;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.theme-toggle {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.theme-toggle:hover {
+  opacity: 0.9;
+}
+
+.your-component {
+  background-color: var(--background-color);
+  color: var(--text-color);
+} 
