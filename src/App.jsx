@@ -7,6 +7,7 @@ import Projects from './pages/Projects'
 import Resume from './pages/Resume'
 import NotFound from './pages/NotFound'
 import ContactForm from './pages/ContactForm'
+import Messages from './pages/Messages'
 import { ThemeProvider } from './context/ThemeContext'
 import ThemeToggle from './components/ThemeToggle'
 import './App.css'
@@ -25,6 +26,7 @@ function App() {
               <Route path="/resume" element={<Resume />} />
               <Route path="/projects" element={<Projects />} />
               <Route path="/contact" element={<ContactForm />} />
+              <Route path="/messages" element={<Messages />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>

@@ -10,7 +10,6 @@ const ContactForm = () => {
     });
     const [errors, setErrors] = useState({});
     const [successMessage, setSuccessMessage] = useState('');
-    const [draftSaved, setDraftSaved] = useState(false);
 
     // Effect to restore form data from localStorage on component mount
     useEffect(() => {
@@ -20,12 +19,6 @@ const ContactForm = () => {
         }
     }, []);
 
-    // Effect to save form data to localStorage whenever it changes
-    useEffect(() => {
-        localStorage.setItem('contactFormDraft', JSON.stringify(formData));
-        setDraftSaved(true); // Indicate that the draft is saved
-    }, [formData]);
-
     // Handle input changes
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -33,7 +26,6 @@ const ContactForm = () => {
             ...formData,
             [name]: type === 'checkbox' ? checked : value
         });
-        setDraftSaved(false); 
     };
 
     // Validate form inputs
@@ -87,7 +79,7 @@ const ContactForm = () => {
 
     return (
         <div>
-            <h1>Contact Us</h1>
+            <h1>Contact Me</h1>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="name">Name:</label>
                 <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required />
@@ -105,13 +97,14 @@ const ContactForm = () => {
                 <textarea id="message" name="message" value={formData.message} onChange={handleChange} required></textarea>
                 {errors.message && <span className="error" style={{ color: 'red' }}>{errors.message}</span>}<br />
 
-                <input type="checkbox" id="consent" name="consent" checked={formData.consent} onChange={handleChange} required />
-                <label htmlFor="consent">I consent to be contacted and my information stored securely.</label>
+                <div className="consent-container">
+                    <input type="checkbox" id="consent" name="consent" checked={formData.consent} onChange={handleChange} required />
+                    <label htmlFor="consent">I consent to be contacted and my information stored securely.</label>
+                </div>
                 {errors.consent && <span className="error" style={{ color: 'red' }}>{errors.consent}</span>}<br />
 
                 <button type="submit">Submit</button>
                 {successMessage && <span className="success" style={{ color: 'green' }}>{successMessage}</span>}
-                {draftSaved && <span className="info" style={{ color: 'blue' }}>Draft saved!</span>}
             </form>
         </div>
     );
